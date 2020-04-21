@@ -4,8 +4,8 @@ public abstract class Character {
     protected Coordinates coord;
     protected Statistics statistics;
 
-    public Character(){
-
+    public Character(String name){
+        this.name = name;
     }
 
     public abstract void setName(String name);
@@ -14,7 +14,7 @@ public abstract class Character {
     public abstract String getName();
 
 
-    public abstract void setStatistics();
+    public abstract void setStatistics(int health, int strength, int inteligence);
 
 
     public abstract Statistics getStatistics();
