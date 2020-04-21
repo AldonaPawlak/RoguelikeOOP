@@ -3,23 +3,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ui {
-    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static String takeUserInput(String messageForUser) throws IOException {
+    public String takeUserInput(String messageForUser) throws IOException {
         System.out.print(messageForUser);
         return reader.readLine();
     }
 
-    public static void clearScreen(){
+    public void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public static void printInstruction(){
+    public void printInstruction(){
         System.out.println("Instruction");
     }
 
-    public static void gameMenu() throws IOException {
+    public void gameMenu() throws IOException {
         printMenu();
         String userOption = takeUserInput("Enter option: ");
         clearScreen();
@@ -43,7 +43,7 @@ public class Ui {
         
     }
 
-    private static void printMenu(){
+    private void printMenu(){
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
                          + "|                 ROGUELIKE ALDOMAT               |\n"
                          + "|-------------------------------------------------|\n"
@@ -51,5 +51,4 @@ public class Ui {
                          + "|2 - Show instruction    |0 - EXIT                |\n"
                          + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
-}
 }
