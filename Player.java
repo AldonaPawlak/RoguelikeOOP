@@ -1,47 +1,46 @@
 
 public class Player extends Character {
-    private String name;
-    private Coordinates coord;
-    private String symbol = "@";
-    private Statistics statistics;
+    private String playerName;
+    private Coordinates playerCoordinates;
+    private String playerSymbol;
+    private Statistics playerStatistics;
 
-    public Player(String name, String playerSymbol, int xCoordinates, int yCoordinates) {
+    public Player(String name, String playerSymbol, int xCoordinate, int yCoordinate) {
         super(name);
-        this.coord = new Coordinates(xCoordinates, yCoordinates);
-        this.name = name;
-        this.symbol = playerSymbol;
-        this.statistics = new Statistics(0, 0, 0);
+        this.playerCoordinates = new Coordinates(xCoordinate, yCoordinate);
+        this.playerName = name;
+        this.playerSymbol = playerSymbol;
     }
 
     public void move(Coordinates direction) {
         System.out.println(direction.toString());
-        int x = this.coord.getX() + direction.getX();
-        int y = this.coord.getY() + direction.getY();
+        int x = this.playerCoordinates.getX() + direction.getX();
+        int y = this.playerCoordinates.getY() + direction.getY();
 
-        this.coord = new Coordinates(x, y);
+        this.playerCoordinates = new Coordinates(x, y);
     }
 
     public void setName(String playerName){
-        this.name = playerName;
+        this.playerName = playerName;
     }
 
     public String getName(){
-        return name;
+        return playerName;
     }
 
     public void setStatistics(int health, int strength, int inteligence){
-        this.statistics = new Statistics(health, strength, inteligence);
+        this.playerStatistics = new Statistics(health, strength, inteligence);
     }
 
     public Statistics getStatistics(){
-        return statistics;
+        return playerStatistics;
     }
 
     public Coordinates getCoord() {
-        return this.coord;
+        return this.playerCoordinates;
     }
 
     public String getSymbol() {
-        return this.symbol;
+        return this.playerSymbol;
     }
 }

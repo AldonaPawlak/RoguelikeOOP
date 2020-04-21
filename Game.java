@@ -10,7 +10,7 @@ class Game extends KeyAdapter {
 
 
     public Game() {
-        player = new Player();
+        this.player = new Player("player", "@", 5, 5);
     }
 
     @Override

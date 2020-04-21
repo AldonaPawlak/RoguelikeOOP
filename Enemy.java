@@ -1,40 +1,39 @@
 
 public class Enemy extends Character{
-    private String name;
-    private Coordinates coord;
-    private String symbol = "#";
-    private Statistics statistics;
+    private String enemyName;
+    private Coordinates enemyCoordinates;
+    private String enemySymbol;
+    private Statistics enemyStatistics;
 
-    public Enemy(String name, String enemySymbol, int xCoordinates, int yCoordinates) {
+    public Enemy(String name, String enemySymbol, int xCoordinate, int yCoordinate) {
         super(name);
-        this.coord = new Coordinates(xCoordinates, yCoordinates);
-        this.name = name;
-        this.symbol = enemySymbol;
-        this.statistics = new Statistics(0, 0, 0);
+        this.enemyCoordinates = new Coordinates(xCoordinate, yCoordinate);
+        this.enemyName = name;
+        this.enemySymbol = enemySymbol;
     }
 
     public void setName(String enemyName){
-        this.name = enemyName;
+        this.enemyName = enemyName;
     }
 
     public String getName(){
-        return name;
+        return enemyName;
     }
 
     public void setStatistics(int health, int strength, int inteligence){
-        this.statistics = new Statistics(health, strength, inteligence);
+        this.enemyStatistics = new Statistics(health, strength, inteligence);
     }
 
     public Statistics getStatistics(){
-        return statistics;
+        return enemyStatistics;
     }
 
     public Coordinates getCoord() {
-        return this.coord;
+        return this.enemyCoordinates;
     }
 
     public String getSymbol() {
-        return this.symbol;
+        return this.enemySymbol;
     }
 
 }
