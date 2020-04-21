@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 
 public class Player {
-    Coordinates coord;
-    String symbol = "\ud83d\udd7a";
+    private String name;
+    private Coordinates coord;
+    private String symbol = "@";
+    private ArrayList<GameObject> inventory;
 
     public Player() {
         this.coord = new Coordinates(5,5);
