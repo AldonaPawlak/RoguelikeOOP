@@ -20,25 +20,29 @@ public class Ui {
     }
 
     public void gameMenu() throws IOException {
-        printMenu();
-        String userOption = takeUserInput("Enter option: ");
-        clearScreen();
-        switch(userOption){
-            case "1":
-                // Game
-                break;
-            case "2":
-                printInstruction();
-                break;
-            case "3":
-                // Scores
-                break;
-            case "0":
-                break;
-            default:
-                System.out.println("Wrong option!");
-                gameMenu();
-                break;
+        boolean gameContinue = true;
+        while (gameContinue){
+            printMenu();
+            String userOption = takeUserInput("Enter option: ");
+            clearScreen();
+            switch(userOption){
+                case "1":
+                    // Game
+                    break;
+                case "2":
+                    printInstruction();
+                    break;
+                case "3":
+                    // Scores
+                    break;
+                case "0":
+                    gameContinue = false;
+                    break;
+                default:
+                    System.out.println("Wrong option!");
+                    gameMenu();
+                    break;
+            }
         }
         
     }
