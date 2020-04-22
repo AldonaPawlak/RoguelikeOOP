@@ -1,7 +1,6 @@
 
-public abstract class Character {
+public abstract class Character /*extends GameObject*/ {
     protected String name;
-    protected Coordinates coord;
     protected Statistics statistics;
 
     public Character(String name){
@@ -14,7 +13,7 @@ public abstract class Character {
     public abstract String getName();
 
 
-    public abstract void setStatistics(int health, int strength, int inteligence);
+    public abstract void setStatistics(int health, int strength, int inteligence, int happiness);
 
 
     public abstract Statistics getStatistics();

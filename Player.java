@@ -28,8 +28,8 @@ public class Player extends Character {
         return playerName;
     }
 
-    public void setStatistics(int health, int strength, int inteligence){
-        this.playerStatistics = new Statistics(health, strength, inteligence);
+    public void setStatistics(int health, int strength, int inteligence, int happiness){
+        this.playerStatistics = new Statistics(health, strength, inteligence, happiness);
     }
 
     public Statistics getStatistics(){
