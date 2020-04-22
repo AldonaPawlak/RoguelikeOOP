@@ -1,5 +1,5 @@
 
-public class Obstacle {
+public class Obstacle extends GameObject{
     private Coordinates pivot;
     private int width;
     private int height;
