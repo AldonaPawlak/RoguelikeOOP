@@ -3,13 +3,15 @@ public class Statistics {
     private int health;
     private int strength;
     private int inteligence;
-    private int attack;
+    private int happiness;
+    private int knowledge;
 
-    public Statistics(int health, int strength, int inteligence){
+    public Statistics(int health, int strength, int inteligence, int happiness){
         this.health = health;
         this.strength = strength;
         this.inteligence = inteligence;
-        this.attack = strength * inteligence;
+        this.happiness = happiness;
+        this.knowledge = (strength * inteligence) + happiness;
     }
 
     public void setHealth(int healthValue){
@@ -33,10 +35,17 @@ public class Statistics {
         return inteligence;
     }
 
-    public void countAttack(){
-        this.attack = strength * inteligence;
+    public void setHappiness(int happinessValue){
+        this.happiness = happinessValue;
     }
-    public int getAttack(){
-        return attack;
+    public int getHappiness(){
+        return happiness;
+    }
+
+    public void countKnowledge(){
+        this.knowledge = (strength * inteligence) + happiness;
+    }
+    public int getKnowledge(){
+        return knowledge;
     }
 }
