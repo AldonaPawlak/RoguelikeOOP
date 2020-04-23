@@ -37,16 +37,24 @@ class Game extends KeyAdapter {
 
         switch (ch) {
             case 'w':
+                if (canPlayerMove(new Coordinates(-1, 0))) {
                 player.move(new Coordinates(-1, 0));
+                }
                 break;
             case 's':
+            if (canPlayerMove(new Coordinates(1, 0))) {
                 player.move(new Coordinates(1, 0));
+                }
                 break;
             case 'a':
+            if (canPlayerMove(new Coordinates(0, -1))) {
                 player.move(new Coordinates(0, -1));
+                }
                 break;
             case 'd':
+            if (canPlayerMove(new Coordinates(0, 1))) {
                 player.move(new Coordinates(0, 1));
+                }
                 break;
             case 'i':
                 player.printInventory();
@@ -71,7 +79,7 @@ class Game extends KeyAdapter {
     public boolean canPlayerMove(Coordinates coordinates) {
         for (Obstacle obstacle : obstacles) {
             if (isPlayerInRange(obstacle, coordinates)) {
-                // obstacle.use(player);
+                obstacle.use(player);
                 return false;
             }
         }
@@ -79,8 +87,8 @@ class Game extends KeyAdapter {
     }
 
     public void createObstacles() {
-        Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, this.width, 1);
-        Obstacle wall2 = new Obstacle("wall2", "#", 0, 0, 1, this.height);
+        Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, this.width, 1, false);
+        Obstacle wall2 = new Obstacle("wall2", "#", 0, 0, 1, this.height, false);
 
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
