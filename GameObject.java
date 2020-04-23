@@ -4,10 +4,10 @@ public abstract class GameObject {
     private String symbol;
     private String name;
 
-    public GameObject(String name, String symbol, int xCoordinate, int yCoordinate){
+    public GameObject(String name, String symbol, int rowIndex, int columnIndex){
         this.name = name;
         this.symbol = symbol;
-        this.coordinates = new Coordinates(xCoordinate, yCoordinate);
+        this.coordinates = new Coordinates(rowIndex, columnIndex);
 
     }
 

@@ -11,7 +11,7 @@ class Game extends KeyAdapter {
     private final int width = 30;
     private final int height = 30;
     private List<Obstacle> obstacles;
-    private String[][] board = new String[width][height];
+    private String[][] board = new String[height][width];
 
     public Game() {
         this.player = new Player("player", " @", 5, 5);
@@ -62,10 +62,10 @@ class Game extends KeyAdapter {
         int width = obstacle.getWidth();
         int height = obstacle.getHeight();
         Coordinates pivot = obstacle.getPivot();
-        int x = this.player.getCoordinates().getX() + coordinates.getX();
-        int y = this.player.getCoordinates().getY() + coordinates.getY();
+        int x = this.player.getCoordinates().getRowIndex() + coordinates.getRowIndex();
+        int y = this.player.getCoordinates().getColumnIndex() + coordinates.getColumnIndex();
 
-        return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
+        return x >= pivot.getRowIndex() && x < pivot.getRowIndex() + height && y >= pivot.getColumnIndex() && y < pivot.getColumnIndex() + width;
     }
 
     public boolean canPlayerMove(Coordinates coordinates) {
@@ -93,8 +93,8 @@ class Game extends KeyAdapter {
             int height = obstacle.getHeight();
             Coordinates pivot = obstacle.getPivot();
 
-            for (int x = pivot.getX(); x < pivot.getX() + height; x++) {
-                for (int y = pivot.getY(); y < pivot.getY() + width; y++) {
+            for (int x = pivot.getRowIndex(); x < pivot.getRowIndex() + height; x++) {
+                for (int y = pivot.getColumnIndex(); y < pivot.getColumnIndex() + width; y++) {
                     this.board[x][y] = obstacle.getSymbol();
                 }
             }
@@ -106,12 +106,12 @@ class Game extends KeyAdapter {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (x == player.getCoordinates().getX() && y == player.getCoordinates().getY()) {
+                if (x == player.getCoordinates().getRowIndex() && y == player.getCoordinates().getColumnIndex()) {
                     boardBuilder.append(player.getSymbol());
-                } else if (x == mentor.getCoordinates().getX() && y == mentor.getCoordinates().getY()) {
+                } else if (x == mentor.getCoordinates().getRowIndex() && y == mentor.getCoordinates().getColumnIndex()) {
                     boardBuilder.append(mentor.getSymbol());
-                } else if (player.getCoordinates().getX() == mentor.getCoordinates().getX()
-                        && player.getCoordinates().getY() == mentor.getCoordinates().getY()) {
+                } else if (player.getCoordinates().getRowIndex() == mentor.getCoordinates().getRowIndex()
+                        && player.getCoordinates().getColumnIndex() == mentor.getCoordinates().getColumnIndex()) {
                     //mentorInteraction();
                 } else if (board[x][y] != null) {
                     boardBuilder.append(board[x][y]);

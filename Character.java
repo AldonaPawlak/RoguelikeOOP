@@ -2,8 +2,8 @@
 public abstract class Character extends GameObject {
     protected Statistics statistics;
 
-    public Character(String name, String symbol, int x, int y){
-        super(name, symbol, x, y);
+    public Character(String name, String symbol, int rowIndex, int columnIndex){
+        super(name, symbol, rowIndex, columnIndex);
         this.statistics = new Statistics();
     }
 
