@@ -1,30 +1,30 @@
 
 public class Coordinates {
-    private int x;
-    private int y;
+    private int rowIndex;
+    private int columnIndex;
 
-    public Coordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Coordinates(int rowIndex, int columnIndex) {
+        this.rowIndex = rowIndex;
+        this.columnIndex = columnIndex;
     }
 
-    public int getX() {
-        return x;
+    public int getRowIndex() {
+        return rowIndex;
     }
 
-    public int getY() {
-        return y;
+    public int getColumnIndex() {
+        return columnIndex;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setRowIndex(int rowIndex) {
+        this.rowIndex = rowIndex;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setColumnIndex(int columnIndex) {
+        this.columnIndex = columnIndex;
     }
 
     public String toString() {
-        return "x: " + this.x + " y: " + this.y;
+        return "rowIndex: " + this.rowIndex + " columnIndex: " + this.columnIndex;
     }
 }
