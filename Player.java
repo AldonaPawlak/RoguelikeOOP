@@ -13,7 +13,6 @@ public class Player extends Character {
     }
 
     public void move(Coordinates direction) {
-        System.out.println(direction.toString());
         int x = this.playerCoordinates.getX() + direction.getX();
         int y = this.playerCoordinates.getY() + direction.getY();
 

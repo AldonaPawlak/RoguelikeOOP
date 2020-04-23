@@ -14,16 +14,20 @@ class Game extends KeyAdapter {
 
     public Game() {
         this.player = new Player("player", " @", 5, 5);
+        player.setStatistics(3, 0, 0, 100);
         this.obstacles = new ArrayList<>();
         createObstacles();
+    }
+
+    private void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
 
         char ch = event.getKeyChar();
-
-        System.out.println((int) ch);
 
         switch (ch) {
             case 'w':
@@ -39,7 +43,7 @@ class Game extends KeyAdapter {
                 player.move(new Coordinates(0, 1));
                 break;
         }
-        System.out.println(player.getCoord().toString());
+        clearScreen();
         printBoard();
     }
 
@@ -87,21 +91,28 @@ class Game extends KeyAdapter {
     }
 
     public void printBoard() {
-        // String[][] board = new String[width][height];
-        // board[this.player.getCoord().getX()][this.player.getCoord().getY()] =
-        // player.getSymbol();
+        StringBuilder boardBuilder = new StringBuilder();
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (i == player.getCoord().getX() && j == player.getCoord().getY()) {
-                    System.out.print(player.getSymbol());
+                    boardBuilder.append(player.getSymbol());
                 } else if (board[i][j] != null) {
-                    System.out.print(board[i][j]);
+                    boardBuilder.append(board[i][j]);
                 } else {
-                    System.out.print(" .");
+                    boardBuilder.append(" .");
                 }
             }
-            System.out.println();
+            boardBuilder.append("\n");
         }
+        boardBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+        + "|Health: " + player.getStatistics().getHealth() + "     | "
+        + "Strength: " + player.getStatistics().getStrength() + "   | "
+        + "Inteligence: " + player.getStatistics().getInteligence() + "|\n"
+        + "|Happiness: " + player.getStatistics().getHappiness() + "| "
+        + "Knowledge: " + player.getStatistics().getKnowledge() + "|               |\n"
+        + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        System.out.println(boardBuilder.toString());
     }
 }
