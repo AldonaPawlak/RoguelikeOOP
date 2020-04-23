@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Ui {
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    private Game game = new Game();
     public String takeUserInput(String messageForUser) throws IOException {
         System.out.print(messageForUser);
         return reader.readLine();
@@ -24,6 +24,7 @@ public class Ui {
             clearScreen();
             switch(userOption){
                 case "1":
+                    game.printBoard();
                     // Game
                     break;
                 case "2":
