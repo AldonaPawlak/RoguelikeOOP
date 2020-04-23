@@ -40,6 +40,28 @@ class Game extends KeyAdapter {
         printBoard();
     }
 
+    public boolean isPlayerInRange(Obstacle obstacle, Coordinates coordinates) {
+        int width = obstacle.getWidth();
+        int height = obstacle.getHeight();
+        Coordinates pivot = obstacle.getPivot();
+        int x = this.player.getCoord().getX() + coordinates.getX();
+        int y = this.player.getCoord().getY() + coordinates.getY();
+
+        return x >= pivot.getX() && x < pivot.getX()+height 
+            && y >= pivot.getY() && y < pivot.getY()+width;
+    }
+
+    public boolean canPlayerMove(Coordinates coordinates) {
+        for (Obstacle obstacle : obstacles) {
+            if(isPlayerInRange(obstacle, coordinates)) {
+                obstacle.use(player);
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
     public void createObstacles() {
         Obstacle wall1 = new Obstacle(new Coordinates(0,0), width, 1, " #");
         Obstacle wall2 = new Obstacle(new Coordinates(0,0), 1, height, "#");
