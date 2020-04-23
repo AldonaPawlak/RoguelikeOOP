@@ -1,45 +1,20 @@
 
 public class Player extends Character {
-    private String playerName;
-    private Coordinates playerCoordinates;
-    private String playerSymbol;
-    private Statistics playerStatistics;
+    private Inventory inventory;
 
-    public Player(String name, String playerSymbol, int xCoordinate, int yCoordinate) {
-        super(name);
-        this.playerCoordinates = new Coordinates(xCoordinate, yCoordinate);
-        this.playerName = name;
-        this.playerSymbol = playerSymbol;
+    public Player(String name, String symbol, int x, int y) {
+        super(name, symbol, x, y);
+        this.inventory = new Inventory();
     }
 
     public void move(Coordinates direction) {
-        int x = this.playerCoordinates.getX() + direction.getX();
-        int y = this.playerCoordinates.getY() + direction.getY();
+        int x = this.coordinates.getX() + direction.getX();
+        int y = this.coordinates.getY() + direction.getY();
 
-        this.playerCoordinates = new Coordinates(x, y);
+        this.coordinates = new Coordinates(x, y);
     }
 
-    public void setName(String playerName){
-        this.playerName = playerName;
-    }
-
-    public String getName(){
-        return playerName;
-    }
-
-    public void setStatistics(int health, int strength, int inteligence, int happiness){
-        this.playerStatistics = new Statistics(health, strength, inteligence, happiness);
-    }
-
-    public Statistics getStatistics(){
-        return playerStatistics;
-    }
-
-    public Coordinates getCoord() {
-        return this.playerCoordinates;
-    }
-
-    public String getSymbol() {
-        return this.playerSymbol;
+    public void printInventory(){
+        inventory.printInventory();
     }
 }

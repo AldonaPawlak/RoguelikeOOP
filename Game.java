@@ -26,7 +26,10 @@ class Game extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent event) {
-
+        clearScreen();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+                         + "|w,s,a,d - moving |i - inventory | o - exit |\n"
+                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         char ch = event.getKeyChar();
 
         switch (ch) {
@@ -42,8 +45,13 @@ class Game extends KeyAdapter {
             case 'd':
                 player.move(new Coordinates(0, 1));
                 break;
+            case 'i':
+                player.printInventory();
+                break;
+            case 'o':
+                System.exit(0);
+                break;
         }
-        clearScreen();
         printBoard();
     }
 
@@ -51,8 +59,8 @@ class Game extends KeyAdapter {
         int width = obstacle.getWidth();
         int height = obstacle.getHeight();
         Coordinates pivot = obstacle.getPivot();
-        int x = this.player.getCoord().getX() + coordinates.getX();
-        int y = this.player.getCoord().getY() + coordinates.getY();
+        int x = this.player.getCoordinates().getX() + coordinates.getX();
+        int y = this.player.getCoordinates().getY() + coordinates.getY();
 
         return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
@@ -68,8 +76,8 @@ class Game extends KeyAdapter {
     }
 
     public void createObstacles() {
-        Obstacle wall1 = new Obstacle(new Coordinates(0, 0), width, 1, " #");
-        Obstacle wall2 = new Obstacle(new Coordinates(0, 0), 1, height, "#");
+        Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, width, 1);
+        Obstacle wall2 = new Obstacle("wall2", "#", 0, 0, 1, height);
 
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
@@ -95,7 +103,7 @@ class Game extends KeyAdapter {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (i == player.getCoord().getX() && j == player.getCoord().getY()) {
+                if (i == player.getCoordinates().getX() && j == player.getCoordinates().getY()) {
                     boardBuilder.append(player.getSymbol());
                 } else if (board[i][j] != null) {
                     boardBuilder.append(board[i][j]);

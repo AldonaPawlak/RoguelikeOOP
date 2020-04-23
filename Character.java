@@ -1,20 +1,21 @@
 
-public abstract class Character /*extends GameObject*/ {
-    protected String name;
+public abstract class Character extends GameObject {
     protected Statistics statistics;
 
-    public Character(String name){
-        this.name = name;
+    public Character(String name, String symbol, int x, int y){
+        super(name, symbol, x, y);
+        this.statistics = new Statistics();
     }
 
-    public abstract void setName(String name);
+    public void setStatistics(int health, int strength, int inteligence, int happiness){
+        this.statistics.setHealth(health);
+        this.statistics.setStrength(strength);
+        this.statistics.setInteligence(inteligence);
+        this.statistics.setHappiness(happiness);
+    }
 
 
-    public abstract String getName();
-
-
-    public abstract void setStatistics(int health, int strength, int inteligence, int happiness);
-
-
-    public abstract Statistics getStatistics();
+    public Statistics getStatistics(){
+        return statistics;
+    }
 }
