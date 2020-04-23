@@ -13,4 +13,8 @@ public class Player extends Character {
 
         this.coordinates = new Coordinates(x, y);
     }
+
+    public void printInventory(){
+        inventory.printInventory();
+    }
 }

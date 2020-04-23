@@ -56,6 +56,9 @@ public class Ui {
         jframe.add(textField);
         jframe.setSize(100, 100);
         jframe.setVisible(true);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+                         + "|w,s,a,d - moving |i - inventory | o - exit |\n"
+                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         game.printBoard();
 
     }

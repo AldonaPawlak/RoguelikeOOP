@@ -26,7 +26,10 @@ class Game extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent event) {
-
+        clearScreen();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+                         + "|w,s,a,d - moving |i - inventory | o - exit |\n"
+                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         char ch = event.getKeyChar();
 
         switch (ch) {
@@ -43,13 +46,12 @@ class Game extends KeyAdapter {
                 player.move(new Coordinates(0, 1));
                 break;
             case 'i':
-                System.out.println("inventory");
+                player.printInventory();
                 break;
             case 'o':
                 System.exit(0);
                 break;
         }
-        clearScreen();
         printBoard();
     }
 
