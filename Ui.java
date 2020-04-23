@@ -2,15 +2,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
 public class Ui {
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    private Game game = new Game();
     public String takeUserInput(String messageForUser) throws IOException {
         System.out.print(messageForUser);
         return reader.readLine();
     }
 
-    public void clearScreen(){
+    private void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -24,6 +27,8 @@ public class Ui {
             clearScreen();
             switch(userOption){
                 case "1":
+                    game();
+                    gameContinue = false;
                     // Game
                     break;
                 case "2":
@@ -42,6 +47,20 @@ public class Ui {
             }
         }
         
+    }
+
+    private void game() throws IOException {
+        JTextField textField = new JTextField();
+        textField.addKeyListener(game);
+        JFrame jframe = new JFrame();
+        jframe.add(textField);
+        jframe.setSize(100, 100);
+        jframe.setVisible(true);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+                         + "|w,s,a,d - moving |i - inventory | o - exit |\n"
+                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        game.printBoard();
+
     }
 
     private void printMenu(){

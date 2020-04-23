@@ -1,15 +1,14 @@
 
-public class Obstacle {
-    private Coordinates pivot;
+public class Obstacle extends GameObject{
+    protected Coordinates pivot;
     private int width;
     private int height;
-    private String symbol;
 
-    public Obstacle(Coordinates pivot, int width, int height, String symbol) {
-        this.pivot = pivot;
+    public Obstacle(String name, String symbol, int xCoordinate, int yCoordinate, int width, int height) {
+        super(name, symbol, xCoordinate, yCoordinate);
+        this.pivot = new Coordinates(xCoordinate, yCoordinate);
         this.width = width;
         this.height = height;
-        this.symbol = symbol;
     }
 
     public Coordinates getPivot() {
@@ -22,9 +21,5 @@ public class Obstacle {
 
     public int getHeight() {
         return height;
-    }
-
-    public String getSymbol() {
-        return symbol;
     }
 }
