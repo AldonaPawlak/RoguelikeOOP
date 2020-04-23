@@ -7,19 +7,22 @@ import java.util.List;
 class Game extends KeyAdapter {
 
     private Player player;
-    private final int width = 20;
-    private final int height = 20;
+    private Mentor mentor;
+    private final int width = 30;
+    private final int height = 30;
     private List<Obstacle> obstacles;
     private String[][] board = new String[width][height];
 
     public Game() {
         this.player = new Player("player", " @", 5, 5);
+        this.mentor = new Mentor("mentor", " &", 7, 7);
         player.setStatistics(3, 0, 0, 100);
+        mentor.setStatistics(100, 100, 100, 100);
         this.obstacles = new ArrayList<>();
         createObstacles();
     }
 
-    private void clearScreen(){
+    private void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -27,7 +30,7 @@ class Game extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent event) {
         clearScreen();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
                          + "|w,s,a,d - moving |i - inventory | o - exit |\n"
                          + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         char ch = event.getKeyChar();
@@ -76,23 +79,23 @@ class Game extends KeyAdapter {
     }
 
     public void createObstacles() {
-        Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, width, 1);
-        Obstacle wall2 = new Obstacle("wall2", "#", 0, 0, 1, height);
+        Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, this.width, 1);
+        Obstacle wall2 = new Obstacle("wall2", "#", 0, 0, 1, this.height);
 
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
-        printObstacles(this.board);
+        setObstacles();
     }
 
-    public void printObstacles(String[][] board) {
+    public void setObstacles() {
         for (Obstacle obstacle : obstacles) {
             int width = obstacle.getWidth();
             int height = obstacle.getHeight();
             Coordinates pivot = obstacle.getPivot();
 
-            for (int i = pivot.getX(); i < pivot.getX() + height; i++) {
-                for (int j = pivot.getY(); j < pivot.getY() + width; j++) {
-                    board[i][j] = obstacle.getSymbol();
+            for (int x = pivot.getX(); x < pivot.getX() + height; x++) {
+                for (int y = pivot.getY(); y < pivot.getY() + width; y++) {
+                    this.board[x][y] = obstacle.getSymbol();
                 }
             }
         }
@@ -101,26 +104,37 @@ class Game extends KeyAdapter {
     public void printBoard() {
         StringBuilder boardBuilder = new StringBuilder();
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (i == player.getCoordinates().getX() && j == player.getCoordinates().getY()) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (x == player.getCoordinates().getX() && y == player.getCoordinates().getY()) {
                     boardBuilder.append(player.getSymbol());
-                } else if (board[i][j] != null) {
-                    boardBuilder.append(board[i][j]);
+                } else if (x == mentor.getCoordinates().getX() && y == mentor.getCoordinates().getY()) {
+                    boardBuilder.append(mentor.getSymbol());
+                } else if (player.getCoordinates().getX() == mentor.getCoordinates().getX()
+                        && player.getCoordinates().getY() == mentor.getCoordinates().getY()) {
+                    //mentorInteraction();
+                } else if (board[x][y] != null) {
+                    boardBuilder.append(board[x][y]);
                 } else {
                     boardBuilder.append(" .");
                 }
             }
             boardBuilder.append("\n");
         }
-        boardBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-        + "|Health: " + player.getStatistics().getHealth() + "     | "
-        + "Strength: " + player.getStatistics().getStrength() + "   | "
-        + "Inteligence: " + player.getStatistics().getInteligence() + "|\n"
-        + "|Happiness: " + player.getStatistics().getHappiness() + "| "
-        + "Knowledge: " + player.getStatistics().getKnowledge() + "|               |\n"
-        + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        boardBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
+                        + "|Health: " + player.getStatistics().getHealth() + "     | " 
+                        + "Strength: " + player.getStatistics().getStrength() + "   | " 
+                        + "Inteligence: " + player.getStatistics().getInteligence() + "|\n" 
+                        + "|Happiness: " + player.getStatistics().getHappiness() + "| " 
+                        + "Knowledge: " + player.getStatistics().getKnowledge()
+                        + "|               |\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         System.out.println(boardBuilder.toString());
+    }
+
+    public void mentorInteraction(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
+                         + "|k - ask about knowledge amount |l - make consultation | m - try yourself with quality game |\n"
+                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 }
