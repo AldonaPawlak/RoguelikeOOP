@@ -3,6 +3,7 @@ public abstract class Character extends GameObject {
     protected Statistics statistics;
 
     public Character(int health, int strength, int inteligence, int happiness){
+        super(name, symbol, xCoordinate, yCoordinate);
         setStatistics(health, strength, inteligence, happiness);
     }
 
