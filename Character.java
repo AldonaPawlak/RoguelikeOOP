@@ -2,9 +2,9 @@
 public abstract class Character extends GameObject {
     protected Statistics statistics;
 
-    public Character(int health, int strength, int inteligence, int happiness){
-        super(name, symbol, xCoordinate, yCoordinate);
-        setStatistics(health, strength, inteligence, happiness);
+    public Character(String name, String symbol, int x, int y){
+        super(name, symbol, x, y);
+        this.statistics = new Statistics();
     }
 
     public void setStatistics(int health, int strength, int inteligence, int happiness){

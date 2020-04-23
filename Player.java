@@ -2,14 +2,15 @@
 public class Player extends Character {
     private Inventory inventory;
 
-    public Player() {
+    public Player(String name, String symbol, int x, int y) {
+        super(name, symbol, x, y);
         this.inventory = new Inventory();
     }
 
     public void move(Coordinates direction) {
-        int x = this.playerCoordinates.getX() + direction.getX();
-        int y = this.playerCoordinates.getY() + direction.getY();
+        int x = this.coordinates.getX() + direction.getX();
+        int y = this.coordinates.getY() + direction.getY();
 
-        this.playerCoordinates = new Coordinates(x, y);
+        this.coordinates = new Coordinates(x, y);
     }
 }

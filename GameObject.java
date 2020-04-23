@@ -1,6 +1,6 @@
 
 public abstract class GameObject {
-    private Coordinates coordinates;
+    protected Coordinates coordinates;
     private String symbol;
     private String name;
 
