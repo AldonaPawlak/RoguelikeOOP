@@ -2,17 +2,20 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 class Game extends KeyAdapter {
-    
+
     private Player player;
     private final int width = 20;
     private final int height = 20;
-    private ArrayList<Obstacle> obstacles;
-    private String[][] board  = new String[width][height];
+    private List<Obstacle> obstacles;
+    private String[][] board = new String[width][height];
 
     public Game() {
-        this.player = new Player("player", "@", 5, 5);
+        this.player = new Player("player", " @", 5, 5);
+        this.obstacles = new ArrayList<>();
+        createObstacles();
     }
 
     @Override
@@ -20,9 +23,9 @@ class Game extends KeyAdapter {
 
         char ch = event.getKeyChar();
 
-        System.out.println((int)ch);
+        System.out.println((int) ch);
 
-        switch(ch) {
+        switch (ch) {
             case 'w':
                 player.move(new Coordinates(-1, 0));
                 break;
@@ -34,7 +37,7 @@ class Game extends KeyAdapter {
                 break;
             case 'd':
                 player.move(new Coordinates(0, 1));
-                break;   
+                break;
         }
         System.out.println(player.getCoord().toString());
         printBoard();
@@ -47,27 +50,26 @@ class Game extends KeyAdapter {
         int x = this.player.getCoord().getX() + coordinates.getX();
         int y = this.player.getCoord().getY() + coordinates.getY();
 
-        return x >= pivot.getX() && x < pivot.getX()+height 
-            && y >= pivot.getY() && y < pivot.getY()+width;
+        return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
 
     public boolean canPlayerMove(Coordinates coordinates) {
         for (Obstacle obstacle : obstacles) {
-            if(isPlayerInRange(obstacle, coordinates)) {
-                obstacle.use(player);
+            if (isPlayerInRange(obstacle, coordinates)) {
+                // obstacle.use(player);
                 return false;
             }
         }
         return true;
     }
-    
-    
+
     public void createObstacles() {
-        Obstacle wall1 = new Obstacle(new Coordinates(0,0), width, 1, " #");
-        Obstacle wall2 = new Obstacle(new Coordinates(0,0), 1, height, "#");
+        Obstacle wall1 = new Obstacle(new Coordinates(0, 0), width, 1, " #");
+        Obstacle wall2 = new Obstacle(new Coordinates(0, 0), 1, height, "#");
 
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
+        printObstacles(this.board);
     }
 
     public void printObstacles(String[][] board) {
@@ -76,25 +78,28 @@ class Game extends KeyAdapter {
             int height = obstacle.getHeight();
             Coordinates pivot = obstacle.getPivot();
 
-            for(int i = pivot.getX(); i< pivot.getX()+height; i++) {
-                for(int j = pivot.getY(); j<pivot.getY()+width; j++) {
+            for (int i = pivot.getX(); i < pivot.getX() + height; i++) {
+                for (int j = pivot.getY(); j < pivot.getY() + width; j++) {
                     board[i][j] = obstacle.getSymbol();
                 }
             }
         }
     }
-    
-    public void printBoard() {
-        String[][] board  = new String[width][height];
-        board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
 
-        for(int i = 0; i< width;  i++) {
-            for(int j = 0; j< height; j++) {
-                if(board[i][j] != null) {
+    public void printBoard() {
+        // String[][] board = new String[width][height];
+        // board[this.player.getCoord().getX()][this.player.getCoord().getY()] =
+        // player.getSymbol();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (i == player.getCoord().getX() && j == player.getCoord().getY()) {
+                    System.out.print(player.getSymbol());
+                } else if (board[i][j] != null) {
                     System.out.print(board[i][j]);
-                    continue;
+                } else {
+                    System.out.print(" .");
                 }
-                System.out.print(" .");
             }
             System.out.println();
         }

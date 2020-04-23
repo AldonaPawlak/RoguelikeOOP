@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
 public class Ui {
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private Game game = new Game();
@@ -24,7 +27,8 @@ public class Ui {
             clearScreen();
             switch(userOption){
                 case "1":
-                    game.printBoard();
+                    game();
+                    gameContinue = false;
                     // Game
                     break;
                 case "2":
@@ -43,6 +47,17 @@ public class Ui {
             }
         }
         
+    }
+
+    private void game() throws IOException {
+        JTextField textField = new JTextField();
+        textField.addKeyListener(game);
+        JFrame jframe = new JFrame();
+        jframe.add(textField);
+        jframe.setSize(100, 100);
+        jframe.setVisible(true);
+        game.printBoard();
+
     }
 
     private void printMenu(){
