@@ -42,6 +42,12 @@ class Game extends KeyAdapter {
             case 'd':
                 player.move(new Coordinates(0, 1));
                 break;
+            case 'i':
+                System.out.println("inventory");
+                break;
+            case 'o':
+                System.exit(0);
+                break;
         }
         clearScreen();
         printBoard();
