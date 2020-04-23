@@ -10,7 +10,7 @@ class Game extends KeyAdapter {
 
 
     public Game() {
-        player = new Player();
+        this.player = new Player("player", "@", 5, 5);
     }
 
     @Override
@@ -38,7 +38,7 @@ class Game extends KeyAdapter {
         printBoard();
     }
 
-    private void printBoard() {
+    public void printBoard() {
         String[][] board  = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
 
