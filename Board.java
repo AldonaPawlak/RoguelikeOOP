@@ -5,7 +5,7 @@ public class Board {
     private final int height = 100;
     private String[][] board  = new String[width][height];
 
-    Board(){
+    Board(String[][] board){
         this.board = board;
     }
 

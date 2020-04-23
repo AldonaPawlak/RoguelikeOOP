@@ -1,13 +1,15 @@
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 class Game extends KeyAdapter {
     
     private Player player;
     private final int width = 20;
     private final int height = 20;
-
+    private ArrayList<Obstacle> obstacles;
+    private String[][] board  = new String[width][height];
 
     public Game() {
         this.player = new Player("player", "@", 5, 5);
@@ -38,6 +40,28 @@ class Game extends KeyAdapter {
         printBoard();
     }
 
+    public void createObstacles() {
+        Obstacle wall1 = new Obstacle(new Coordinates(0,0), width, 1, " #");
+        Obstacle wall2 = new Obstacle(new Coordinates(0,0), 1, height, "#");
+
+        this.obstacles.add(wall1);
+        this.obstacles.add(wall2);
+    }
+
+    public void printObstacles(String[][] board) {
+        for (Obstacle obstacle : obstacles) {
+            int width = obstacle.getWidth();
+            int height = obstacle.getHeight();
+            Coordinates pivot = obstacle.getPivot();
+
+            for(int i = pivot.getX(); i< pivot.getX()+height; i++) {
+                for(int j = pivot.getY(); j<pivot.getY()+width; j++) {
+                    board[i][j] = obstacle.getSymbol();
+                }
+            }
+        }
+    }
+    
     public void printBoard() {
         String[][] board  = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
