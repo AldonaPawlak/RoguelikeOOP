@@ -8,7 +8,7 @@ class Game extends KeyAdapter {
 
     private Player player;
     private Mentor mentor;
-    private final int width = 30;
+    private final int width = 80;
     private final int height = 30;
     private List<Obstacle> obstacles;
     private String[][] board = new String[height][width];
@@ -104,8 +104,8 @@ class Game extends KeyAdapter {
     public void printBoard() {
         StringBuilder boardBuilder = new StringBuilder();
 
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
                 if (x == player.getCoordinates().getRowIndex() && y == player.getCoordinates().getColumnIndex()) {
                     boardBuilder.append(player.getSymbol());
                 } else if (x == mentor.getCoordinates().getRowIndex() && y == mentor.getCoordinates().getColumnIndex()) {
