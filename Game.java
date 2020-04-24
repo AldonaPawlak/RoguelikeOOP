@@ -193,10 +193,10 @@ class Game extends KeyAdapter {
             }
             boardBuilder.append("\n");
         }
-        boardBuilder.append("|Health: " + player.getStatistics().getHealth() + "     | " 
+        boardBuilder.append("|Health: " + player.getStatistics().getHealth() + "   | " 
                         + "Strength: " + player.getStatistics().getStrength() + "   | " 
-                        + "Inteligence: " + player.getStatistics().getInteligence() + "\n" 
-                        + "|Happiness: " + player.getStatistics().getHappiness() + "| " 
+                        + "Inteligence: " + player.getStatistics().getInteligence() + "   | " 
+                        + "Happiness: " + player.getStatistics().getHappiness() + "   | " 
                         + "Knowledge: " + player.getStatistics().getKnowledge());
 
         System.out.println(boardBuilder.toString());
