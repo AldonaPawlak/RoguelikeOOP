@@ -11,6 +11,7 @@ class Game extends KeyAdapter {
     private final int width = 80;
     private final int height = 40;
     private List<Obstacle> obstacles;
+    private List<Item> items;
     private String[][] board = new String[height][width];
 
     public Game() {
@@ -19,7 +20,9 @@ class Game extends KeyAdapter {
         player.setStatistics(3, 0, 0, 100);
         mentor.setStatistics(100, 100, 100, 100);
         this.obstacles = new ArrayList<>();
+        this.items = new ArrayList<>();
         createObstacles();
+        createItems();
     }
 
     private void clearScreen() {
@@ -64,6 +67,7 @@ class Game extends KeyAdapter {
                 break;
         }
         printBoard();
+        isItemInteraction();
     }
 
     public boolean isPlayerInRange(Obstacle obstacle, Coordinates coordinates) {
@@ -150,6 +154,28 @@ class Game extends KeyAdapter {
         }
     }
 
+    public void createItems(){
+        Item filler = new Item("filler", " #", 0, 0, 0, Weapon.BOOK);
+        Item tangerine = new Item("tangerine", " ð", 26, 75, 2, Food.TANGERINE);
+        Item cofee = new Item("cofee", " µ", 23, 70, 5, Food.COFFEE);
+        Item pistol = new Item("pistol", " ¬", 17, 77, 3, Weapon.PISTOL);
+
+        items.add(filler);
+        items.add(tangerine);
+        items.add(cofee);
+        items.add(pistol);
+        setItems();
+    }
+
+    public void setItems() {
+        for (Item item : items) {
+            int x = item.getCoordinates().getRowIndex();
+            int y = item.getCoordinates().getColumnIndex();
+            this.board[x][y] = item.getSymbol();
+        }
+    }
+
+
     public void printBoard() {
         StringBuilder boardBuilder = new StringBuilder();
 
@@ -159,9 +185,6 @@ class Game extends KeyAdapter {
                     boardBuilder.append(player.getSymbol());
                 } else if (x == mentor.getCoordinates().getRowIndex() && y == mentor.getCoordinates().getColumnIndex()) {
                     boardBuilder.append(mentor.getSymbol());
-                } else if (player.getCoordinates().getRowIndex() == mentor.getCoordinates().getRowIndex()
-                        && player.getCoordinates().getColumnIndex() == mentor.getCoordinates().getColumnIndex()) {
-                    //mentorInteraction();
                 } else if (board[x][y] != null) {
                     boardBuilder.append(board[x][y]);
                 } else {
@@ -170,20 +193,42 @@ class Game extends KeyAdapter {
             }
             boardBuilder.append("\n");
         }
-        boardBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
-                        + "|Health: " + player.getStatistics().getHealth() + "     | " 
+        boardBuilder.append("|Health: " + player.getStatistics().getHealth() + "     | " 
                         + "Strength: " + player.getStatistics().getStrength() + "   | " 
-                        + "Inteligence: " + player.getStatistics().getInteligence() + "|\n" 
+                        + "Inteligence: " + player.getStatistics().getInteligence() + "\n" 
                         + "|Happiness: " + player.getStatistics().getHappiness() + "| " 
-                        + "Knowledge: " + player.getStatistics().getKnowledge()
-                        + "|               |\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        + "Knowledge: " + player.getStatistics().getKnowledge());
 
         System.out.println(boardBuilder.toString());
     }
 
-    public void mentorInteraction(){
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
-                         + "|k - ask about knowledge amount |l - make consultation | m - try yourself with quality game |\n"
-                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    public void isItemInteraction(){
+        for (int i = 0; i < items.size(); i++){
+            Item item = items.get(i);
+            if (player.getCoordinates().getRowIndex() == item.getCoordinates().getRowIndex()
+            && player.getCoordinates().getColumnIndex() == item.getCoordinates().getColumnIndex()){
+                if (item.getSymbol().equals(" ð")){
+                    player.getStatistics().setStrength(player.getStatistics().getStrength() + 2);
+                    int x = item.getCoordinates().getRowIndex();
+                    int y = item.getCoordinates().getColumnIndex();
+                    this.board[x][y] = " .";
+                    items.remove(item);
+                }
+                if (item.getSymbol().equals(" µ")){
+                    player.getStatistics().setStrength(player.getStatistics().getStrength() + 5);
+                    int x = item.getCoordinates().getRowIndex();
+                    int y = item.getCoordinates().getColumnIndex();
+                    this.board[x][y] = " .";
+                    items.remove(item);
+                }
+                if (item.getSymbol().equals(" ¬")){
+                    player.addToInventory(item);
+                    int x = item.getCoordinates().getRowIndex();
+                    int y = item.getCoordinates().getColumnIndex();
+                    this.board[x][y] = " .";
+                    items.remove(item);
+                }
+            }
+        }
     }
 }
