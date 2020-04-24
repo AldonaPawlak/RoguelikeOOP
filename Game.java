@@ -158,10 +158,12 @@ class Game extends KeyAdapter {
         Item filler = new Item("filler", " #", 0, 0, 0, Weapon.BOOK);
         Item tangerine = new Item("tangerine", " ð", 26, 75, 2, Food.TANGERINE);
         Item cofee = new Item("cofee", " µ", 23, 70, 5, Food.COFFEE);
+        Item pistol = new Item("pistol", " ¬", 17, 77, 3, Weapon.PISTOL);
 
         items.add(filler);
         items.add(tangerine);
         items.add(cofee);
+        items.add(pistol);
         setItems();
     }
 
@@ -214,6 +216,13 @@ class Game extends KeyAdapter {
                 }
                 if (item.getSymbol().equals(" µ")){
                     player.getStatistics().setStrength(player.getStatistics().getStrength() + 5);
+                    int x = item.getCoordinates().getRowIndex();
+                    int y = item.getCoordinates().getColumnIndex();
+                    this.board[x][y] = " .";
+                    items.remove(item);
+                }
+                if (item.getSymbol().equals(" ¬")){
+                    player.addToInventory(item);
                     int x = item.getCoordinates().getRowIndex();
                     int y = item.getCoordinates().getColumnIndex();
                     this.board[x][y] = " .";

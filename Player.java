@@ -17,4 +17,8 @@ public class Player extends Character {
     public void printInventory(){
         inventory.printInventory();
     }
+
+    public void addToInventory(Item item){
+        inventory.addItemToInventory(item);
+    }
 }
