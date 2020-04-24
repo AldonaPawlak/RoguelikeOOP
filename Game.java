@@ -11,6 +11,7 @@ class Game extends KeyAdapter {
     private final int width = 80;
     private final int height = 40;
     private List<Obstacle> obstacles;
+    private List<Item> items;
     private String[][] board = new String[height][width];
 
     public Game() {
@@ -19,7 +20,9 @@ class Game extends KeyAdapter {
         player.setStatistics(3, 0, 0, 100);
         mentor.setStatistics(100, 100, 100, 100);
         this.obstacles = new ArrayList<>();
+        this.items = new ArrayList<>();
         createObstacles();
+        createItems();
     }
 
     private void clearScreen() {
@@ -150,6 +153,22 @@ class Game extends KeyAdapter {
         }
     }
 
+    public void createItems(){
+        Item tangerine = new Item("tangerine", " ð", 26, 75, 2, Food.TANGERINE);
+
+        items.add(tangerine);
+        setItems();
+    }
+
+    public void setItems() {
+        for (Item item : items) {
+            int x = item.getCoordinates().getRowIndex();
+            int y = item.getCoordinates().getColumnIndex();
+            this.board[x][y] = item.getSymbol();
+        }
+    }
+
+
     public void printBoard() {
         StringBuilder boardBuilder = new StringBuilder();
 
@@ -159,9 +178,6 @@ class Game extends KeyAdapter {
                     boardBuilder.append(player.getSymbol());
                 } else if (x == mentor.getCoordinates().getRowIndex() && y == mentor.getCoordinates().getColumnIndex()) {
                     boardBuilder.append(mentor.getSymbol());
-                } else if (player.getCoordinates().getRowIndex() == mentor.getCoordinates().getRowIndex()
-                        && player.getCoordinates().getColumnIndex() == mentor.getCoordinates().getColumnIndex()) {
-                    //mentorInteraction();
                 } else if (board[x][y] != null) {
                     boardBuilder.append(board[x][y]);
                 } else {
