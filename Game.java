@@ -9,7 +9,7 @@ class Game extends KeyAdapter {
     private Player player;
     private Mentor mentor;
     private final int width = 80;
-    private final int height = 30;
+    private final int height = 40;
     private List<Obstacle> obstacles;
     private String[][] board = new String[height][width];
 
@@ -86,12 +86,27 @@ class Game extends KeyAdapter {
         return true;
     }
 
+
     public void createObstacles() {
         Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, this.width, 1, false);
-        Obstacle wall2 = new Obstacle("wall2", "#", 0, 0, 1, this.height, false);
+        Obstacle wall2 = new Obstacle("wall2", "#",0, 0, 1, this.height, false);
+        Obstacle wall3 = new Obstacle("wall1", "# ", 39, 0, this.width, 1, false);
+        Obstacle wall4 = new Obstacle("wall2", " #", 0, 79, 1, this.height, false);
+        Obstacle kitchenWallTop = new Obstacle("kitchenWallTop", " #", 20, 65, 15, 1, false);
+        Obstacle kitchenWallLeft = new Obstacle("kitchenWallLeft", " #", 20, 63, 1, 19, false);
+        Obstacle mentorsRoomLeft = new Obstacle("mentorsRoomLeft", " #", 20, 53, 1, 19, false);
+        Obstacle staffRoomLeft = new Obstacle("staffRoomLeft)", " #", 15, 41, 1, 24, false);
+        Obstacle brickRoomLeft = new Obstacle("brickRoomLeft)", " #", 12, 17, 1, 27, false);
 
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
+        this.obstacles.add(wall3);
+        this.obstacles.add(wall4);
+        this.obstacles.add(kitchenWallTop);
+        this.obstacles.add(kitchenWallLeft);
+        this.obstacles.add(mentorsRoomLeft);
+        this.obstacles.add(staffRoomLeft);
+        this.obstacles.add(brickRoomLeft);
         setObstacles();
     }
 
