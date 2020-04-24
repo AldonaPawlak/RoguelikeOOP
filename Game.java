@@ -155,7 +155,7 @@ class Game extends KeyAdapter {
     }
 
     public void createItems(){
-        Item filler = new Item("filler", " #", 0, 0, 0, Weapon.BOOK);
+        Item filler = new Item("filler", "#", 0, 0, 0, Weapon.BOOK);
         Item tangerine = new Item("tangerine", " ð", 26, 75, 2, Food.TANGERINE);
         Item cofee = new Item("cofee", " µ", 23, 70, 5, Food.COFFEE);
         Item pistol = new Item("pistol", " ¬", 17, 77, 3, Weapon.PISTOL);
