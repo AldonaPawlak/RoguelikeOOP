@@ -67,6 +67,7 @@ class Game extends KeyAdapter {
                 break;
         }
         printBoard();
+        isItemInteraction();
     }
 
     public boolean isPlayerInRange(Obstacle obstacle, Coordinates coordinates) {
@@ -154,9 +155,13 @@ class Game extends KeyAdapter {
     }
 
     public void createItems(){
+        Item filler = new Item("filler", " #", 0, 0, 0, Weapon.BOOK);
         Item tangerine = new Item("tangerine", " ð", 26, 75, 2, Food.TANGERINE);
+        Item cofee = new Item("cofee", " µ", 23, 70, 5, Food.COFFEE);
 
+        items.add(filler);
         items.add(tangerine);
+        items.add(cofee);
         setItems();
     }
 
@@ -186,20 +191,35 @@ class Game extends KeyAdapter {
             }
             boardBuilder.append("\n");
         }
-        boardBuilder.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
-                        + "|Health: " + player.getStatistics().getHealth() + "     | " 
+        boardBuilder.append("|Health: " + player.getStatistics().getHealth() + "     | " 
                         + "Strength: " + player.getStatistics().getStrength() + "   | " 
-                        + "Inteligence: " + player.getStatistics().getInteligence() + "|\n" 
+                        + "Inteligence: " + player.getStatistics().getInteligence() + "\n" 
                         + "|Happiness: " + player.getStatistics().getHappiness() + "| " 
-                        + "Knowledge: " + player.getStatistics().getKnowledge()
-                        + "|               |\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        + "Knowledge: " + player.getStatistics().getKnowledge());
 
         System.out.println(boardBuilder.toString());
     }
 
-    public void mentorInteraction(){
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" 
-                         + "|k - ask about knowledge amount |l - make consultation | m - try yourself with quality game |\n"
-                         + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    public void isItemInteraction(){
+        for (int i = 0; i < items.size(); i++){
+            Item item = items.get(i);
+            if (player.getCoordinates().getRowIndex() == item.getCoordinates().getRowIndex()
+            && player.getCoordinates().getColumnIndex() == item.getCoordinates().getColumnIndex()){
+                if (item.getSymbol().equals(" ð")){
+                    player.getStatistics().setStrength(player.getStatistics().getStrength() + 2);
+                    int x = item.getCoordinates().getRowIndex();
+                    int y = item.getCoordinates().getColumnIndex();
+                    this.board[x][y] = " .";
+                    items.remove(item);
+                }
+                if (item.getSymbol().equals(" µ")){
+                    player.getStatistics().setStrength(player.getStatistics().getStrength() + 5);
+                    int x = item.getCoordinates().getRowIndex();
+                    int y = item.getCoordinates().getColumnIndex();
+                    this.board[x][y] = " .";
+                    items.remove(item);
+                }
+            }
+        }
     }
 }
