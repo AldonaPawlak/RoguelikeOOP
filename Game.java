@@ -90,13 +90,26 @@ class Game extends KeyAdapter {
     public void createObstacles() {
         Obstacle wall1 = new Obstacle("wall1", " #", 0, 0, this.width, 1, false);
         Obstacle wall2 = new Obstacle("wall2", "#",0, 0, 1, this.height, false);
-        Obstacle wall3 = new Obstacle("wall1", "# ", 39, 0, this.width, 1, false);
-        Obstacle wall4 = new Obstacle("wall2", " #", 0, 79, 1, this.height, false);
+        Obstacle wall3 = new Obstacle("wall3", "# ", 39, 0, this.width, 1, false);
+        Obstacle wall4 = new Obstacle("wall4", " #", 0, 79, 1, this.height -1, false);
         Obstacle kitchenWallTop = new Obstacle("kitchenWallTop", " #", 20, 65, 15, 1, false);
         Obstacle kitchenWallLeft = new Obstacle("kitchenWallLeft", " #", 20, 63, 1, 19, false);
         Obstacle mentorsRoomLeft = new Obstacle("mentorsRoomLeft", " #", 20, 53, 1, 19, false);
         Obstacle staffRoomLeft = new Obstacle("staffRoomLeft)", " #", 15, 41, 1, 24, false);
         Obstacle brickRoomLeft = new Obstacle("brickRoomLeft)", " #", 12, 17, 1, 27, false);
+        Obstacle brickRoomLeft2 = new Obstacle("brickRoomLeft2", " #", 0, 17, 1, 11, false);
+        Obstacle brickRoomTop = new Obstacle("brickRoomTop", " #", 14, 18, 10, 1, false);
+        Obstacle brickRoomTop2 = new Obstacle("brickRoomTop2", " #", 14, 29, 13, 1, false);
+        Obstacle staffRoomTop = new Obstacle("staffRoomTop", " #", 20, 42, 5, 1, false);
+        Obstacle staffRoomTop2 = new Obstacle("staffRoomTop2", " #", 20, 48, 5, 1, false);
+        Obstacle meetingRoomTop = new Obstacle("meetingRoomTop", " #", 20, 54, 3, 1, false);
+        Obstacle meetingRoomTop2 = new Obstacle("meetingRoomTop2", " #", 20, 58, 6, 1, false);
+        Obstacle corridorWallTop = new Obstacle("corridorWallTop", " #", 1, 17, 33, 5, false);
+        Obstacle stairs = new Obstacle("stairs", " #", 1, 50, 15, 14, false);
+        Obstacle toiletTop = new Obstacle("toiletTop", " #", 1, 65, 14, 7, false);
+        Obstacle toiletMiddle = new Obstacle("toiletMiddle", " #", 8, 70, 1, 8, false);
+        Obstacle toiletMiddle2 = new Obstacle("toiletMiddle2", " #", 17, 70, 1, 3, false);
+        Obstacle toiletMiddle3 = new Obstacle("toiletMiddle3", " #", 14, 66, 4, 1, false);
 
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
@@ -107,6 +120,19 @@ class Game extends KeyAdapter {
         this.obstacles.add(mentorsRoomLeft);
         this.obstacles.add(staffRoomLeft);
         this.obstacles.add(brickRoomLeft);
+        this.obstacles.add(brickRoomLeft2);
+        this.obstacles.add(brickRoomTop);
+        this.obstacles.add(brickRoomTop2);
+        this.obstacles.add(staffRoomTop);
+        this.obstacles.add(staffRoomTop2);
+        this.obstacles.add(meetingRoomTop);
+        this.obstacles.add(meetingRoomTop2);
+        this.obstacles.add(corridorWallTop);
+        this.obstacles.add(stairs);
+        this.obstacles.add(toiletTop);
+        this.obstacles.add(toiletMiddle);
+        this.obstacles.add(toiletMiddle2);
+        this.obstacles.add(toiletMiddle3);
         setObstacles();
     }
 
